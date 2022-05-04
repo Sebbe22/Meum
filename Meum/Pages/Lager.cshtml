@@ -1,0 +1,49 @@
+﻿@page
+@model Meum.Pages.LagerModel
+@{
+}
+
+<h3>Liste af alle Enheder:</h3>
+<h4><a href="/TilføjEnhed">+ Tilføj ny enhed<a /></h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Vare ID
+            </th>
+            <th>
+                Navn
+            </th>
+            <th>
+                Antal
+            </th>
+            <th>
+                Pris
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.EnhedList)
+        {
+        <tr>
+            <td>
+                @item.VareId
+            </td>
+            <td>
+                @item.Navn
+            </td>
+            <td>
+                @item.Antal
+            </td>
+            <td>
+                @item.Pris Kr
+            </td>
+            <td>
+                @*<a class="btn" type="button" asp-page="SletKunde" asp-route-Tlf="@item.TlfNummer"></a>*@
+                <a href="SletVare/@item.VareId">Delete<a />
+            </td>
+        </tr>
+
+        }
+    </tbody>
+</table>

@@ -1,0 +1,32 @@
+﻿@page
+@model Meum.Pages.TilføjEnhedModel
+@{
+}
+
+<h1>Tilføj Enhed</h1>
+
+<form method="post">
+
+    <div asp-validation-summary="All" class="alert-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Enhed.Navn" class="control-label"> Navn </label>
+        <input asp-for="@Model.Enhed.Navn" class="form-control" />
+        <span asp-validation-for="Enhed.Navn" class="alert-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Enhed.Antal" class="control-label">Antal </label>
+        <input asp-for="@Model.Enhed.Antal" class="form-control" />
+        <span asp-validation-for="Enhed.Antal" class="alert-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Enhed.Pris" class="control-label">Pris</label>
+        <input asp-for="@Model.Enhed.Pris" class="form-control" />
+        <span asp-validation-for="Enhed.Pris" class="alert-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
