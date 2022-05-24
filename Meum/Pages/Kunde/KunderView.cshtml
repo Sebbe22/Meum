@@ -1,0 +1,89 @@
+﻿@page
+@model Meum.Pages.KunderViewModel
+@{
+}
+<head>
+    <style>
+        .oversigt {
+            background: #F5ECDB;
+            padding: 15px;
+            color: #F5ECDB
+        }
+    </style>
+</head>
+<h3>Liste af alle kunder</h3>
+<div class="oversigt">
+
+
+<td>
+    <h4>   <a href="TilføjKundeAdresse">+ Tilføj Ny Kunde</a> </h4>
+</td>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Kunde ID
+        </th>
+        <th>
+            Fornavn
+        </th>
+        <th>
+            Efternavn
+        </th>
+        <th>
+            Tlf Nummer
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            AdresseID
+        </th>
+        <th>
+            New sub
+        </th>
+        <th>
+            SubStart
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.KundeList)
+    {
+        <tr>
+            <td>
+                @item.IdKunde
+            </td>
+            <td>
+                @item.Fornavn
+            </td>
+            <td>
+                @item.Efternavn
+            </td>
+            <td>
+                @item.TlfNummer
+            </td>
+            <td>
+                @item.Email
+            </td>
+            <td>
+                @item.AdresseID
+            </td>
+            <td>
+                @item.NewlySub
+            </td>
+            <td>
+                @item.SubStart
+            </td>
+            <td>
+                @*<a class="btn" type="button" asp-page="SletKunde" asp-route-Tlf="@item.TlfNummer"></a>*@
+                <a href="SletKunde/@item.TlfNummer">
+                Slet<a />
+                <a href="UpdaterKunde/@item.TlfNummer">Opdater<a />
+            </td>
+        </tr>
+
+    }
+    </tbody>
+</table>
+</div>

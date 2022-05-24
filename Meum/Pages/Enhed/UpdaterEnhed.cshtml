@@ -1,0 +1,40 @@
+﻿@page "{id}"
+@model Meum.Pages.UpdaterEnhedModel
+@{
+}
+<h1>Opdater en enhed</h1>
+
+<form method="post">
+
+    <div class="form-group">
+
+
+        <input hidden asp-for="@Model.enhed.VareId" class="form-control" />
+        <input disabled asp-for="@Model.enhed.VareId" class="form-control" />
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.enhed.Navn" class="control-label"> Navn </label>
+        <input asp-for="@Model.enhed.Navn" class="form-control" />
+
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.enhed.Antal" class="control-label">Antal </label>
+        <input asp-for="@Model.enhed.Antal" class="form-control" />
+
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.enhed.Pris" class="control-label">Pris</label>
+        <input asp-for="@Model.enhed.Pris" class="form-control" />
+
+    </div>
+
+
+    <div class="form-group">
+        <input type="submit" value="Opdater" class="btn btn-primary" />
+    </div>
+</form>
+<div>
+    <a asp-page="Lager">Tilbage</a>
+</div>

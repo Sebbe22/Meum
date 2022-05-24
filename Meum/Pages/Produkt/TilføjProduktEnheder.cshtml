@@ -1,0 +1,29 @@
+﻿@page  "{Id}"
+@using Meum.Model
+@model Meum.Pages.TilføjProduktEnhederModel
+@{
+}
+<h1>Tilføj enheder til produktet</h1>
+
+<p>Vælg en enhed som produktet består af og angiv antal.</p>
+
+<form method="post" >
+    <label for="enhed">Vælg enhed:</label>
+    <select name="enhed" id="enhed">
+        @foreach (Enhed e in @Model.Enheder)
+        {
+            <option value="@e.Navn">@e.Navn</option>
+        } 
+     
+    </select>
+    <br><br>
+    <label for="antal">Indtast Antal:</label>
+    <input type="text" id="antal" name="antal"><br><br>
+    <input type="submit" value="Submit">
+    
+    
+    
+</form>
+<div>
+    <a asp-page="Produkter">produkter</a>
+</div>

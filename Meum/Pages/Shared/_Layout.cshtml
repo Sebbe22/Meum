@@ -6,28 +6,56 @@
     <title>@ViewData["Title"] - Meum</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #D3BFA6;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-family: roxborough bold;
+                font-size: 30px;
+            }
+
+                li a:hover:not(.active) {
+                    background-color: #EDE1CE;
+                    ;
+                }
+
+        .active {
+            background-color: #4E3927;
+        }
+    </style>
 </head>
+@*--------------------------BOOOOOODY---------------------------------------------*@
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Meum</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+
+        
+        <ul>
+            <li><div><a class="active" asp-page="/Oversigt">Oversigt</a></div></li>
+            <li><div><a asp-page="/Forsendelser">Forsendelser</a></div></li>
+            <li><div><a asp-page="/Enhed/Lager">Lager</a></div></li>
+            <li><div><a asp-page="/Produkt/Produkter">Produkter</a></div></li>
+            <li><div><a asp-page="/Kunde/Kunderview">Kunder</a></div></li>
+            <li style ="float:right"><div><a asp-page="Logud">Log ud</a></div></li>
+            
+
+        </ul>
+
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">

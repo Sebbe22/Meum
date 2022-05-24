@@ -4,24 +4,26 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Meum.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Meum.Pages
 {
+    [Authorize]
     public class KunderViewModel : PageModel
     {
-        private KundeDatabase _kundeData;
+        private IKundeKatalog _kundeData;
 
-        public KunderViewModel(KundeDatabase data)
+        public KunderViewModel(IKundeKatalog data)
         {
             _kundeData = data;
         }
 
-        public KundeDatabase KundeData
+        public IKundeKatalog KundeData
         {
             get => _kundeData;
-            set => _kundeData = (KundeDatabase)value;
+            set => _kundeData = (IKundeKatalog)value;
         }
 
         public List<Kunde> KundeList = new List<Kunde>();

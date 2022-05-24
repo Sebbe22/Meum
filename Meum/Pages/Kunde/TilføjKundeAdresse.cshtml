@@ -1,0 +1,45 @@
+﻿@page
+@model Meum.Pages.TilføjKundeAdresseModel
+@{
+}
+
+<h1>Indtast adresse</h1>
+
+<form method="post">
+
+
+    <div class="form-group">
+        <label asp-for="@Model.Adresse.Vejnavn" class="control-label"> Vejnavn </label>
+        <input asp-for="@Model.Adresse.Vejnavn" class="form-control" />
+        <span asp-validation-for="Adresse.Vejnavn" class="alert-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Adresse.HusNr" class="control-label"> HusNr </label>
+        <input asp-for="@Model.Adresse.HusNr" class="form-control" />
+        <span asp-validation-for="Adresse.HusNr" class="alert-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Adresse.Etage" class="control-label">Etage</label>
+        <input asp-for="@Model.Adresse.Etage" class="form-control" />
+        <span asp-validation-for="Adresse.Etage" class="alert-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <select name="Adresse.ById" asp-for="@Model.Adresse.ById">
+            <option value="">Vælg post nr</option>
+            <option value="1050">1050</option>
+            <option value="4000">4000</option>
+            <option value="4621">4621</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="næste" class="btn btn-primary" />
+    </div>
+</form>
+
+
+<div>
+    <a asp-page="KunderView">Tilbage</a>
+</div>

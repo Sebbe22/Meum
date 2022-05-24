@@ -1,0 +1,75 @@
+﻿@page "{Id}"
+@model Meum.Pages.TilføjKundeModel
+@{
+}
+
+<h1>Tilføj Kunde til kundeliste</h1>
+
+
+
+<form method="post">
+
+
+
+    <div class="form-group">
+        <label asp-for="@Model.Kunde.Fornavn" class="control-label"> Fornavn </label>
+        <input asp-for="@Model.Kunde.Fornavn" class="form-control" required />
+        <span asp-validation-for="Kunde.Fornavn" class="alert-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Kunde.Efternavn" class="control-label"> Efternavn </label>
+        <input asp-for="@Model.Kunde.Efternavn" class="form-control" required />
+        <span asp-validation-for="Kunde.Efternavn" class="alert-danger"></span>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Kunde.AbonType" class="control-label"> AbonType </label>
+        <input asp-for="@Model.Kunde.AbonType" class="form-control" required />
+        <span asp-validation-for="Kunde.AbonType" class="alert-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="@Model.Kunde.Email" class="form-control" required type="email" />
+        <span asp-validation-for="Kunde.Email" class="alert-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Kunde.TlfNummer" class="control-label">Tlf</label>
+        <input asp-for="@Model.Kunde.TlfNummer" class="form-control" required />
+        <span asp-validation-for="Kunde.TlfNummer" class="alert-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Kunde.NewlySub" class="control-label">NewlySub</label>
+        <input asp-for="@Model.Kunde.NewlySub" class="form-control" />
+        <span asp-validation-for="Kunde.NewlySub" class="alert-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Kunde.AdresseID" class="control-label">AdresseID</label>
+        <input asp-for="@Model.Kunde.AdresseID" class="form-control" required />
+        <span asp-validation-for="Kunde.AdresseID" class="alert-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Kunde.SubStart" class="control-label">SubStart</label>
+        <input asp-for="@Model.Kunde.SubStart" class="form-control" required />
+        <span asp-validation-for="Kunde.SubStart" class="alert-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input hidden asp-for="@Model.Kunde.Afsend" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Tilføj" class="btn btn-primary" />
+    </div>
+
+</form>
+
+<div>
+    <a asp-page="KunderView">Tilbage</a>
+</div>

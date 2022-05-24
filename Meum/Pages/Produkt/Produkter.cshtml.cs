@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Meum.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Meum.Pages
 {
+    [Authorize]
     public class ProdukterModel : PageModel
     {
-        private ProduktDatabase _produktData;
+        private ProduktKatalog _produktData;
 
-        public ProdukterModel(ProduktDatabase data)
+        public ProdukterModel(ProduktKatalog data)
         {
             _produktData = data;
         }
 
-        public ProduktDatabase ProduktData
+        public ProduktKatalog ProduktData
         {
             get => _produktData;
-            set => _produktData = (ProduktDatabase)value;
+            set => _produktData = (ProduktKatalog)value;
         }
 
         public List<Produkt> ProduktList = new List<Produkt>();

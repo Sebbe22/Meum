@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace Meum.Model
 {
-    public class EnhedDatabase
+    public class EnhedKatalog
     {
-        public EnhedDatabase()
+        public EnhedKatalog()
         {
         }
 
-        private const string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog = MeumLager; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
+        private const string connectionString = @"Data Source=seba-zealand-dbserver.database.windows.net;Initial Catalog=seba-zealand-db;User ID=sebaAdmin;Password=Slange123!;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        /// <summary>
+        /// henter alle enheder fra lager databasen og putter dem i en liste
+        /// </summary>
+        /// <returns> retunerer en liste med alle enheder fra lager databasen </returns>
         public List<Enhed> GetAllEnheder()
         {
             List<Enhed> enheder = new List<Enhed>();
@@ -51,6 +54,11 @@ namespace Meum.Model
             return e;
         }
 
+        /// <summary>
+        /// henter en enhed fra databasen udfra ID'et
+        /// </summary>
+        /// <param name="enhedId"> ID'et på den enhed man gerne vil have fat i skal være en int </param>
+        /// <returns> retunerer en enhed hvis ID matcher det input man gav </returns>
         public Enhed GetEnhedById(int enhedId)
         {
             Enhed enhed = new Enhed();
@@ -75,6 +83,11 @@ namespace Meum.Model
             return enhed;
         }
 
+        /// <summary>
+        /// tilføjer en enhed til databasen
+        /// </summary>
+        /// <param name="enhed"> den enhed som bliver tilføjet til databasen </param>
+        /// <returns> retunerer den enhed som blev tilføjet </returns>
         public Enhed AddEnhed(Enhed enhed)
         {
             string queryString =
@@ -96,7 +109,7 @@ namespace Meum.Model
                     throw new ArgumentException("Produktet er ikke oprettet");
                 }
 
-                //return GetEnhedById(enhed.VareId);
+
                 return enhed;
             }
 
@@ -104,6 +117,11 @@ namespace Meum.Model
 
         }
 
+        /// <summary>
+        /// sletter en enhed fra Lager databasen udfra det ID som er givet
+        /// </summary>
+        /// <param name="vareId"> ID'et på den enhed som skal slettes </param>
+        /// <returns> retunerer den enhed som blev slettet </returns>
         public Enhed DeleteEnhedById(int vareId)
         {
             Enhed e = GetEnhedById(vareId);
@@ -126,19 +144,47 @@ namespace Meum.Model
             }
         }
 
+        /// <summary>
+        /// får fat i en enhed i databasen udfra navnet
+        /// </summary>
+        /// <param name="name"> navnet på den enhed som man vil have fat på </param>
+        /// <returns> retunerer den enhed som matcher det navn der blev givet </returns>
+        public Enhed GetEnhedByName(string name)
+        {
+            Enhed enhed = new Enhed();
+            List<Enhed> enheder = GetAllEnheder();
+            foreach (Enhed e in enheder)
+            {
+                string n = e.Navn.Trim();
+                if (n == name)
+                {
+                    enhed = e;
+                }
+            }
+
+            return enhed;
+        }
+
+        /// <summary>
+        /// Opdaterer værdier på en enhed
+        /// </summary>
+        /// <param name="vareId"> ID'et på den enhed som skal opdateres </param>
+        /// <param name="enhed"> den enhed man vil opdaterer til </param>
+        /// <returns> retunerer en bool som fortæller om enheden blev opdateret eller ej </returns>
         public bool UpdateEnhed(int vareId, Enhed enhed)
         {
             string queryString =
-                "Update Enhed set VareId = @VareId, Navn = @Navn, Pris = @Pris, Antal = @Antald";
+                "Update Lager set Navn = @Navn, Pris = @Pris, Antal = @Antal where Vare_ID = @UpdateProduktId";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Connection.Open();
                 command.Parameters.AddWithValue("@UpdateProduktId", vareId);
+                //command.Parameters.AddWithValue("@VareId", vareId);
                 command.Parameters.AddWithValue("@Navn", enhed.Navn);
                 command.Parameters.AddWithValue("@Pris", enhed.Pris);
-                command.Parameters.AddWithValue("@Beskrivelse", enhed.Antal);
+                command.Parameters.AddWithValue("@Antal", enhed.Antal);
 
 
                 int rows = command.ExecuteNonQuery();

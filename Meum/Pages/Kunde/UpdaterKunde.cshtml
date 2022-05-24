@@ -1,0 +1,61 @@
+﻿@page "{Tlf}"
+@model Meum.Pages.UpdaterKundeModel
+@{
+}
+
+<h1>Updater Kunde</h1>
+
+<form method="post">
+
+    <div class="form-group">
+        <label asp-for="@Model.kunde.IdKunde" class="control-label"> Id </label>
+        <input hidden asp-for="@Model.kunde.IdKunde" />
+        <input disabled asp-for="@Model.kunde.IdKunde" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.kunde.Fornavn" class="control-label"> Fornavn </label>
+        <input asp-for="@Model.kunde.Fornavn" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.kunde.Efternavn" class="control-label"> Efternavn </label>
+        <input asp-for="@Model.kunde.Efternavn" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.kunde.Email" class="control-label">Email </label>
+        <input asp-for="@Model.kunde.Email" class="form-control" required type="email" />
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.kunde.TlfNummer" class="control-label">tlf nummer</label>
+        <input asp-for="@Model.kunde.TlfNummer" class="form-control" />
+    </div>
+
+   
+
+    <div class="form-group">
+        <label hidden asp-for="@Model.kunde.AdresseID" class="control-label"> adresseID </label>
+        <input hidden asp-for="@Model.kunde.AdresseID" class="form-control" />
+
+    </div>
+
+    <div class="form-group">
+        <label hidden asp-for="@Model.kunde.NewlySub" class="control-label"> NewSub </label>
+        <input hidden asp-for="@Model.kunde.NewlySub" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label hidden asp-for="@Model.kunde.SubStart" class="control-label"> abonnement start </label>
+        <input hidden asp-for="@Model.kunde.SubStart" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Opdater" class="btn btn-primary" />
+    </div>
+</form>
+<div>
+    <a asp-page="Kunderview">Tilbage</a>
+</div>

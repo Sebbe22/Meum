@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Meum.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Meum.Pages
 {
-    public class TilføjProduktModel : PageModel
+    [Authorize]
+    public class TilføjEnhedModel : PageModel
     {
-        private ProduktDatabase _produkt;
+        private EnhedKatalog _enhed;
 
         [BindProperty]
-        public Produkt Produkt { get; set; }
-
-        public TilføjProduktModel(ProduktDatabase data)
+        public Enhed Enhed { get; set; }
+        
+        public TilføjEnhedModel(EnhedKatalog data)
         {
-            _produkt = data;
+            _enhed = data;
         }
         public IActionResult OnGet()
         {
@@ -30,7 +32,7 @@ namespace Meum.Pages
             {
                 return Page();
             }
-            _produkt.AddProdukt(Produkt);
+            _enhed.AddEnhed(Enhed);
             return RedirectToPage("Lager");
         }
     }

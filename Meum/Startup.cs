@@ -8,6 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Meum.Catalog;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Meum
 {
@@ -23,10 +27,29 @@ namespace Meum
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options => {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
+                cookieOptions.LoginPath = "/Login";
+            });
+
+            services.AddMvc().AddRazorPagesOptions(options => {
+                options.Conventions.AuthorizeFolder("/Oversigt");
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        
+            //Singleton
             services.AddRazorPages();
-            services.AddSingleton<KundeDatabase, KundeDatabase>();
-            services.AddSingleton<EnhedDatabase, EnhedDatabase>();
-            services.AddSingleton<ProduktDatabase, ProduktDatabase>();
+            services.AddSingleton<IKundeKatalog, KundeKatalog>();
+            services.AddSingleton<EnhedKatalog, EnhedKatalog>();
+            services.AddSingleton<ProduktKatalog, ProduktKatalog>();
+            services.AddSingleton<AdresseKatalog, AdresseKatalog>();
+            services.AddSingleton<ProduktEnhederKatalog, ProduktEnhederKatalog>();
+            services.AddSingleton<SalgKatalog, SalgKatalog>();
+            services.AddSingleton<ILoginCatalog, LoginCatalog>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +65,7 @@ namespace Meum
             }
 
             app.UseStaticFiles();
-
+            app.UseAuthentication(); // Tilføjet for at få login til at virke
             app.UseRouting();
 
             app.UseAuthorization();

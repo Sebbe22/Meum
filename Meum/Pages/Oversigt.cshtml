@@ -1,0 +1,307 @@
+﻿@page
+@model Meum.Pages.OversigtModel
+@{
+}
+
+
+
+
+<head>
+    <style>
+
+        .oversigt {
+            background: #F5ECDB;
+            padding: 15px;
+            color: #F5ECDB
+        }
+
+
+        .oversigtTextColor {
+            color: black;
+        }
+
+        .topright {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 18px;
+        }
+
+        .topright1 {
+            position: absolute;
+            top: 80px;
+            right: 170px;
+            font-size: 18px;
+        }
+
+        .topleft {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            font-size: 18px;
+        }
+
+        .bottomleft {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+            font-size: 18px;
+        }
+
+        .bottomright {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+            font-size: 18px;
+        }
+
+        .bottomleft1 {
+            position: absolute;
+            bottom: 8px;
+            left: 40px;
+            font-size: 18px;
+        }
+
+        .bottomright1 {
+            position: absolute;
+            bottom: 8px;
+            right: 40px;
+            font-size: 18px;
+        }
+
+        .container {
+            position: relative;
+        }
+    </style>
+
+</head>
+
+
+
+
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<body>
+    <div class="container">
+        <div class="oversigt">
+            <div>
+                <b>
+                    <p style="color: black">
+                        Estimat for rækkevide af skrabehoveder:
+                    </p>
+                </b>
+            </div>
+            <div class="oversigtTextColor" style="float:left">
+                <p style="font-size: 20px; font-family: HIND GUNTUR MEDIUM">
+                    @Model.skraberTomDato
+                </p>
+            </div>
+            <br/>
+            <br/>
+            <div>
+                <b>
+                    <p style="color: black">
+                        Forsendelser i dag:
+                    </p>
+                </b>
+            </div>
+            <div class="oversigtTextColor" style="float:left">
+                <p style="font-size: 20px; font-family: HIND GUNTUR MEDIUM">
+                    @Model.AntalForsendelseridag
+                </p>
+            </div>
+        </div>
+        <div class="oversigt">
+            <div class="topright">
+                <div class="oversigtTextColor">
+                    <p style="font-size: 50px;font-family: HIND GUNTUR MEDIUM">Abonnenter</p>
+
+                </div>
+
+            </div>
+            <div class="topright1">
+                <div class="oversigtTextColor">
+                    <br />
+                    <p style="font-size: 40px; font-family: HIND GUNTUR MEDIUM ">@Model.subCount </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="container">
+        <div class="oversigt">
+
+            <p style="color: black; font-size: 40px; font-family: HIND GUNTUR MEDIUM">Lageroverblik</p>
+            <p style="font-size: 40px; font-family: HIND GUNTUR MEDIUM">Lageroverblik</p>
+            <p style="font-size: 40px; font-family: HIND GUNTUR MEDIUM">Lageroverblik</p>
+            <p style="font-size: 40px; font-family: HIND GUNTUR MEDIUM">Lageroverblik</p>
+
+
+            <div class="bottomright1">
+                @if (Model.lagerstatusSkraber == "grøn")
+                {
+                    <img src="/Images/Grøn_skrabehoved.png" height="200" />
+                }
+                @if (Model.lagerstatusSkraber == "gul")
+                {
+                    <img src="/Images/Gul_skrabehoved.png" height="200" />
+                }
+                @if (Model.lagerstatusSkraber == "rød")
+                {
+                    <img src="/Images/Rød_skrabehoved.png" height="200" />
+                }
+            </div>
+            <div class="bottomleft1">
+                @if (Model.lagerstatusHåndtag == "grøn")
+                {
+                    <img src="/Images/Grøn_Håndtag.png" height="200" />
+                }
+                @if (Model.lagerstatusHåndtag == "gul")
+                {
+                    <img src="/Images/Gul_Håndtag.png" height="200" />
+                }
+                @if (Model.lagerstatusHåndtag == "rød")
+                {
+                    <img src="/Images/Rød_Håndtag.png" height="200" />
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <div class="container">
+        <div class="oversigt">
+
+            <p style="color: black; font-size: 40px; font-family: HIND GUNTUR MEDIUM">Salgsoverblik</p>
+            <br />
+
+            @*Den her del af koden laver de to grafer*@
+
+            <canvas id="RefillChart" style="width: 100%; max-width: 525px; display: unset;"></canvas>
+            <canvas id="StarterkitChart" style="width: 100%; max-width: 525px; float: right"></canvas>
+
+
+
+            <script>
+
+                //Først konverteres c# modellen om til javascript
+                var RefillArrayX = [];
+
+                @foreach (var d in Model.SkraberPlotX)
+                {
+                    @:RefillArrayX.push("@d");
+                }
+
+
+
+                var RefillArrayY = [];
+
+                @foreach (var d in Model.SkraberPlotY)
+                {
+                    @:RefillArrayY.push("@d");
+                }
+
+
+                var StarterkitArrayY = [];
+
+                @foreach (var d in Model.SkraberPloty)
+                {
+                    @:StarterkitArrayY.push("@d");
+                }
+
+
+                var StarterkitArrayX = [];
+
+                @foreach (var d in Model.SkraberPlotx)
+                {
+                    @:StarterkitArrayX.push("@d");
+                }
+
+
+
+
+
+                var xValuesRefill = RefillArrayX;
+                var yValuesRefill = RefillArrayY;
+                var xValuesStarterkit = StarterkitArrayX;
+                var yValuesStarterkit = StarterkitArrayY;
+                var barColors = ["#4E3927", "#7C5748", "#B8926B", "#D3BFA6", "#4E3927 ", "#7C5748", "#B8926B", "#D3BFA6", "#4E3927 ", "#7C5748", "#B8926B", "#D3BFA6"];
+
+                new Chart("RefillChart",
+                    {
+                        type: "bar",
+                        data: {
+                            labels: xValuesRefill,
+                            datasets: [
+                                {
+                                    backgroundColor: barColors,
+                                    data: yValuesRefill,
+                                }
+                            ]
+                        },
+                        options: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: "Salg af refills for de forgangene 12 måneder"
+                            },
+                            scales: {
+                                yAxes: [
+                                    {
+                                        display: true,
+                                        ticks: {
+                                            beginAtZero: true,
+
+
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    });
+
+                new Chart("StarterkitChart",
+                    {
+                        type: "bar",
+                        data: {
+                            labels: xValuesStarterkit,
+                            datasets: [
+                                {
+                                    backgroundColor: barColors,
+                                    data: yValuesStarterkit,
+                                }
+                            ]
+                        },
+                        options: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: "Salg af starterkits for de forgangene 12 måneder"
+                            },
+                            scales: {
+                                yAxes: [
+                                    {
+                                        display: true,
+                                        ticks: {
+                                            beginAtZero: true,
+
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    });
+            </script>
+        </div>
+    </div>
+
+
+</body>
+</html>

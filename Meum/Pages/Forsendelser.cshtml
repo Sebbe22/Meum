@@ -1,0 +1,452 @@
+﻿@page
+@model Meum.Pages.ForsendelserModel
+@{
+}
+<head>
+    <style>
+        .oversigt {
+            background: #F5ECDB;
+            padding: 15px;
+            color: #F5ECDB
+        }
+      
+    </style>
+</head>
+
+<br/>
+<br/>
+<div class="oversigt">
+<table class="table" >
+    <thead>
+        <tr>
+            <th>
+                @DateTime.Today.ToString("dddd, MMMM dd yyyy")
+            </th>
+            <th>
+                Fornavn
+            </th>
+            <th>
+                Efternavn
+            </th>
+            <th>
+                Adresse
+            </th>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Dato for afsending
+            </th>
+
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.forsendelser1)
+        {
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @item.Fornavn
+                </td>
+                <td>
+                    @item.Efternavn
+                </td>
+                <td>
+                    @item.AdresseID
+                </td>
+                <td>
+                    @if (@item.NewlySub == true)
+                    {
+                        <p>Startkit</p>
+                    }
+                    @if (@item.NewlySub == false)
+                    {
+                        <p>Refill</p>
+                    }
+                </td>
+                <td>
+                    @item.SubStart.Date.ToString("MMMM dd yyyy")
+                </td>
+                <td>
+                    <form method="post">
+                        <div>
+                            @if (item.Afsend == false)
+                            {
+                                <input type="submit" value="Færdig" asp-route-TlfNummer="@item.TlfNummer" asp-route-NewlySub="@item.NewlySub" />
+                            }
+                        </div>
+                    </form>
+                </td>
+
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<table class="table" >
+    <thead>
+        <tr>
+            <th>
+                @DateTime.Today.AddDays(1).ToString("dddd, MMMM dd yyyy")
+            </th>
+            <th>
+                Fornavn
+            </th>
+            <th>
+                Efternavn
+            </th>
+            <th>
+                Adresse
+            </th>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Dato for afsending
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.forsendelser2)
+        {
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @item.Fornavn
+                </td>
+                <td>
+                    @item.Efternavn
+                </td>
+                <td>
+                    @item.AdresseID
+                </td>
+                <td>
+                    @if (@item.NewlySub == true)
+                    {
+                        <p>Startkit</p>
+                    }
+                    @if (@item.NewlySub == false)
+                    {
+                        <p>Refill</p>
+                    }
+                </td>
+                <td>
+                    @item.SubStart.Date.ToString("MMMM dd yyyy")
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<table class="table" >
+    <thead>
+        <tr>
+            <th>
+                @DateTime.Today.AddDays(2).ToString("dddd, MMMM dd yyyy")
+            </th>
+            <th>
+                Fornavn
+            </th>
+            <th>
+                Efternavn
+            </th>
+            <th>
+                Adresse
+            </th>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Dato for afsending
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.forsendelser3)
+        {
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @item.Fornavn
+                </td>
+                <td>
+                    @item.Efternavn
+                </td>
+                <td>
+                    @item.AdresseID
+                </td>
+                <td>
+                    @if (@item.NewlySub == true)
+                    {
+                        <p>Startkit</p>
+                    }
+                    @if (@item.NewlySub == false)
+                    {
+                        <p>Refill</p>
+                    }
+                </td>
+                <td>
+                    @item.SubStart.Date.ToString("MMMM dd yyyy")
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<table class="table" >
+    <thead>
+        <tr>
+            <th>
+                @DateTime.Today.AddDays(3).ToString("dddd, MMMM dd yyyy")
+            </th>
+            <th>
+                Fornavn
+            </th>
+            <th>
+                Efternavn
+            </th>
+            <th>
+                Adresse
+            </th>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Dato for afsending
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.forsendelser4)
+        {
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @item.Fornavn
+                </td>
+                <td>
+                    @item.Efternavn
+                </td>
+                <td>
+                    @item.AdresseID
+                </td>
+                <td>
+                    @if (@item.NewlySub == true)
+                    {
+                        <p>Startkit</p>
+                    }
+                    @if (@item.NewlySub == false)
+                    {
+                        <p>Refill</p>
+                    }
+                </td>
+                <td>
+                    @item.SubStart.Date.ToString("MMMM dd yyyy")
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<table class="table" >
+    <thead>
+        <tr>
+            <th>
+                @DateTime.Today.AddDays(4).ToString("dddd, MMMM dd yyyy")
+            </th>
+            <th>
+                Fornavn
+            </th>
+            <th>
+                Efternavn
+            </th>
+            <th>
+                Adresse
+            </th>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Dato for afsending
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.forsendelser5)
+        {
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @item.Fornavn
+                </td>
+                <td>
+                    @item.Efternavn
+                </td>
+                <td>
+                    @item.AdresseID
+                </td>
+                <td>
+                    @if (@item.NewlySub == true)
+                    {
+                        <p>Startkit</p>
+                    }
+                    @if (@item.NewlySub == false)
+                    {
+                        <p>Refill</p>
+                    }
+                </td>
+                <td>
+                    @item.SubStart.Date.ToString("MMMM dd yyyy")
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @DateTime.Today.AddDays(5).ToString("dddd, MMMM dd yyyy")
+            </th>
+            <th>
+                Fornavn
+            </th>
+            <th>
+                Efternavn
+            </th>
+            <th>
+                Adresse
+            </th>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Dato for afsending
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.forsendelser6)
+        {
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @item.Fornavn
+                </td>
+                <td>
+                    @item.Efternavn
+                </td>
+                <td>
+                    @item.AdresseID
+                </td>
+                <td>
+                    @if (@item.NewlySub == true)
+                    {
+                        <p>Startkit</p>
+                    }
+                    @if (@item.NewlySub == false)
+                    {
+                        <p>Refill</p>
+                    }
+                </td>
+                <td>
+                    @item.SubStart.Date.ToString("MMMM dd yyyy")
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @DateTime.Today.AddDays(6).ToString("dddd, MMMM dd yyyy")
+            </th>
+            <th>
+                Fornavn
+            </th>
+            <th>
+                Efternavn
+            </th>
+            <th>
+                Adresse
+            </th>
+            <th>
+                Produkt
+            </th>
+            <th>
+                Dato for afsending
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.forsendelser7)
+        {
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @item.Fornavn
+                </td>
+                <td>
+                    @item.Efternavn
+                </td>
+                <td>
+                    @item.AdresseID
+                </td>
+                <td>
+                    @if (@item.NewlySub == true)
+                    {
+                        <p>Startkit</p>
+                    }
+                    @if (@item.NewlySub == false)
+                    {
+                        <p>Refill</p>
+                    }
+                </td>
+                <td>
+                    @item.SubStart.Date.ToString("MMMM dd yyyy")
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+</div>

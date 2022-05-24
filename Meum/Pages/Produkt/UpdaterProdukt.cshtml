@@ -1,0 +1,37 @@
+﻿@page "{produktId}"
+@using Meum.Model
+@model Meum.Pages.UpdaterProduktModel
+@{
+}
+
+<h1>Opdater Produkt</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="@Model.produkt.ProduktId" class="control-label"> Id </label>
+        <input hidden asp-for="@Model.produkt.ProduktId"/>
+        <input disabled asp-for="@Model.produkt.ProduktId" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.produkt.Navn" class="control-label"> Navn </label>
+        <input asp-for="@Model.produkt.Navn" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.produkt.Pris" class="control-label"> pris </label>
+        <input asp-for="@Model.produkt.Pris" class="form-control"/>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.produkt.Beskrivelse" class="control-label">Beskrivelse</label>
+        <input asp-for="@Model.produkt.Beskrivelse" class="form-control"/>
+    </div>
+
+
+
+    <div class="form-group">
+        <input type="submit" value="Opdater" class="btn btn-primary"/>
+    </div>
+</form>

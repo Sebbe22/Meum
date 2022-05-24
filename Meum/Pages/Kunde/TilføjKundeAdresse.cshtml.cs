@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Meum.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Meum.Pages
 {
-    public class TilføjEnhedModel : PageModel
+    [Authorize]
+    public class TilføjKundeAdresseModel : PageModel
     {
-        private EnhedDatabase _enhed;
+        private AdresseKatalog _adresse;
 
         [BindProperty]
-        public Enhed Enhed { get; set; }
-        
-        public TilføjEnhedModel(EnhedDatabase data)
+        public Adresse Adresse { get; set; }
+
+        public TilføjKundeAdresseModel(AdresseKatalog data)
         {
-            _enhed = data;
+            _adresse = data;
         }
+
         public IActionResult OnGet()
         {
             return Page();
@@ -30,8 +33,10 @@ namespace Meum.Pages
             {
                 return Page();
             }
-            _enhed.AddEnhed(Enhed);
-            return RedirectToPage("Lager");
+
+            _adresse.AddAdresse(Adresse);
+
+            return RedirectToPage("TilføjKunde", new { Id = _adresse.GetAdresseByVejnav(Adresse.Vejnavn).AdresseId });
         }
     }
 }

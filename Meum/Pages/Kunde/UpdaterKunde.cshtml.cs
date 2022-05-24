@@ -3,36 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Meum.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Meum.Pages
 {
-    public class SletKundeModel : PageModel
+    [Authorize]
+    public class UpdaterKundeModel : PageModel
     {
-        private KundeDatabase _kundeData;
-
+        private IKundeKatalog _kundeData;
 
         [BindProperty]
         public Kunde kunde { get; set; }
 
-        public SletKundeModel(KundeDatabase data)
+        public UpdaterKundeModel(IKundeKatalog data)
         {
             _kundeData = data;
         }
-
-        public IActionResult OnGet(string Tlf)
+        public void OnGet(string Tlf)
         {
-            
-           kunde = _kundeData.GetPersonByPhoneNo(Tlf);
 
-            return Page();
+            kunde = _kundeData.GetPersonByPhoneNo(Tlf);
+
         }
 
         public IActionResult OnPost(string Tlf)
         {
-            _kundeData.DeletePersonByPhoneNo(Tlf);
-
+            _kundeData.UpdateKunde(Tlf, kunde);
             return RedirectToPage("KunderView");
         }
     }
